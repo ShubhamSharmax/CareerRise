@@ -1,4 +1,4 @@
-import { User } from "../models/user.model.jsadd ";
+import { User } from "../models/user.model.js ";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -80,11 +80,12 @@ export const logout = async (req, res) => {
 export const updateProfile = async (req, res) =>{
     try {
         const {fullname, email, phoneNumber, bio, skills} = req.body;
-        if(!fullname || !email || !phoneNumber || !bio || !skills){
-            return res.status(400).json({ message: 'All fields are required' });
-        }
 
-        const skillsArray = skills.split(",")
+        let skillsArray;
+        
+        if(skills){
+            skillsArray = skills.split(",")
+        }
         const userId = req.id; //middleware authentication
         let user = await User.findById(userId);
         if(!user) {
@@ -92,11 +93,12 @@ export const updateProfile = async (req, res) =>{
         }
 
         //Updating Data To User Profile
-        user.fullname = fullname;
-        user.email = email;
-        user.phoneNumber = phoneNumber;
-        user.profile.bio = bio;
-        user.profile.skills = skillsArray;
+        if(fullname) user.fullname = fullname;
+        if(email) user.email = email;
+        if(phoneNumber) user.phoneNumber = phoneNumber;
+        if(bio) user.profile.bio = bio;
+        if(skills) user.profile.skills = skillsArray;
+
         await user.save();
 
         user = {
