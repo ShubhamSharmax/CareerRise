@@ -34,8 +34,8 @@ export const register = async (req,res) => {
 // Login a user
 export const login = async (req, res) => {
     try {
-        const { email, password, role} = req.body;
-        if(!email || !password  || !role) {
+        const { email, password} = req.body;
+        if(!email || !password) {
             return res.status(400).json({ message: 'All fields are required' });
         }
         let user = await User.findOne({ email });
@@ -51,8 +51,6 @@ export const login = async (req, res) => {
         }
         const token = jwt.sign(tokenData, process.env.SECRET_KEY, { expiresIn: '1d'});
 
-        return res.status(200).cookie("token", token, {maxAge: 1*24*60*60*1000, httpsOnly:true, sameSite:'strict'}).json({message: `WelCome Back ${user.fullname}`,user});
-
         user = {
             _id: user._id,
             fullname: user.fullname,
@@ -61,7 +59,7 @@ export const login = async (req, res) => {
             role: user.role,
             profile:user.profile
         }
-        res.json({ message: 'Logged In Successfully' });
+        return res.status(200).cookie("token", token, {maxAge: 1*24*60*60*1000, httpsOnly:true, sameSite:'strict'}).json({message: `WelCome Back ${user.fullname}`,user});
     } catch (error) {
         res.status(500).json({ message: error });
     }

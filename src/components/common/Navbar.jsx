@@ -1,13 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
 import { Avatar, AvatarImage } from '../ui/avatar';
 import { LogOut, User2 } from 'lucide-react';
 import { Button } from '../ui/button';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { toast } from 'sonner';
+import { setUser } from '@/redux/authSlice';
 
 
 const Navbar = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const {user} = useSelector(store=>store.auth)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const handleLogout = async() => {
+        try {
+            const apiUrl = `${import.meta.env.VITE_API_USER}/logout`
+            const res = await axios.get(apiUrl,{withCredentials: true});
+            if(res.status === 200){
+                dispatch(setUser(null));
+                navigate('/')
+                toast.success(res.data.message)
+            }         
+        } catch (error) {
+            toast.error(error.response.data.message);
+        }
+    }
     return (
         <nav className='navbar flex items-center justify-between mx-auto max-w-7xl h-16'>
             <div className="nav-left">
@@ -19,7 +39,7 @@ const Navbar = () => {
                     <NavLink to="/jobs" className={({ isActive }) =>`font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700" : "text-slate-500"}`}>Jobs</NavLink>
                     <NavLink to="/browse" className={({ isActive }) =>`font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700" : "text-slate-500"}`}>Browse</NavLink>
                 </ul>
-                {isLoggedIn && (
+                {user && (
                     <div className="profile">
                         <Popover>
                             <PopoverTrigger>
@@ -34,8 +54,8 @@ const Navbar = () => {
                                             <AvatarImage src="https://github.com/shadcn.png" />
                                         </Avatar>
                                         <div>
-                                            <h1 className='text-lg font-semibold'>Shubham Sharma</h1>
-                                            <p className='text-sm text-muted-foreground'>Full Stack Developer</p>
+                                            <h1 className='text-lg font-semibold'>{user?.fullname}</h1>
+                                            <p className='text-sm text-muted-foreground'>{user?.profile?.bio}</p>
                                         </div>
                                     </div>
                                     <div className='flex flex-col text-slate-500'>
@@ -45,7 +65,7 @@ const Navbar = () => {
                                         </div>
                                         <div className='flex items-center w-fit gap-1 cursor-pointer'>
                                             <LogOut />
-                                            <Button variant="link" className='text-base text-slate-700'>Logout</Button>
+                                            <Button variant="link" className='text-base text-slate-700' onClick={handleLogout}>Logout</Button>
                                         </div>
                                     </div>
                                 </div>
@@ -53,7 +73,7 @@ const Navbar = () => {
                         </Popover>
                     </div>
                 )}
-                {!isLoggedIn && (
+                {!user && (
                     <div className="buttons flex items gap-2">
                         <Link to='/login'><Button variant="outline">Log In</Button></Link>
                         <Link to='/signup'><Button>Sign Up</Button></Link>

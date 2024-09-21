@@ -11,12 +11,18 @@ import applicationRoute from "./routes/application.route.js";
 const app = express();
 dotenv.config();
 const PORT = process.env.PORT || 4000;
+const FRONTEND_URL = process.env.FRONTEND_URL;
 
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(cors());
+
+const corsOptions = {
+  origin: FRONTEND_URL,
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
