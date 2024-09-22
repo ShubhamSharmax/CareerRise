@@ -7,6 +7,7 @@ import HomePage from "./components/pages/HomePage";
 import Footer from "./components/common/Footer";
 import JobsPage from "./components/pages/JobsPage";
 import BrowsePage from "./components/pages/BrowsePage";
+import UserProfile from "./components/pages/UserProfile";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/browse" element={<BrowsePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/profile" element={<UserProfile/>} />
         </Routes>
         <Toaster />
       </main>
