@@ -5,8 +5,10 @@ import { Badge } from '../ui/badge'
 import { Avatar, AvatarImage } from '../ui/avatar'
 import { Bookmark } from 'lucide-react'
 import { Button } from '../ui/button'
+import { useNavigate } from 'react-router-dom'
 
 const JobCard = () => {
+    const navigate = useNavigate();
     return (
         <div>
             <Card>
@@ -35,7 +37,7 @@ const JobCard = () => {
                         <Badge variant='ghost' className='text-blue-600 font-medium text-sm'>positions</Badge>
                         <Badge variant='ghost' className='text-cyan-500 font-medium text-sm'>Job-Type</Badge>
                     </div>
-                    <Button className='bg-cyan-500 hover:bg-cyan-700'>View Details</Button>
+                    <Button onClick={()=> navigate('/jobs/job/jobid')} className='bg-cyan-500 hover:bg-cyan-700'>View Details</Button>
                 </CardFooter>
             </Card>
         </div>

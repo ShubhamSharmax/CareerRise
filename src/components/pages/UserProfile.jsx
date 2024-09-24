@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Avatar, AvatarImage } from '../ui/avatar'
 import { Button } from '../ui/button'
 import { Mail, PenBox, Phone } from 'lucide-react'
 import { useSelector } from 'react-redux'
 import { Badge } from '../ui/badge'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '../ui/table'
+import UpdateProfile from '../common/UpdateProfile'
 
 const UserProfile = () => {
     const { user } = useSelector(store => store.auth)
@@ -20,7 +21,7 @@ const UserProfile = () => {
                         <p className='font-medium'>{user?.profile?.bio}</p>
                     </div>
                 </div>
-                <Button variant='outline' className='rounded-full h-12 w-12 p-0'><PenBox /></Button>
+                <UpdateProfile/>
             </div>
             <div className='grid grid-cols-[20%_1fr] gap-5 p-8 items-center'>
                 <h2 className='font-bold text-lg'><Mail /></h2>
