@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
 import { Avatar, AvatarImage } from '../ui/avatar'
 import { Button } from '../ui/button'
-import { Mail, PenBox, Phone } from 'lucide-react'
+import { Mail, Phone } from 'lucide-react'
 import { useSelector } from 'react-redux'
 import { Badge } from '../ui/badge'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '../ui/table'
@@ -21,7 +20,7 @@ const UserProfile = () => {
                         <p className='font-medium'>{user?.profile?.bio}</p>
                     </div>
                 </div>
-                <UpdateProfile/>
+                <UpdateProfile />
             </div>
             <div className='grid grid-cols-[20%_1fr] gap-5 p-8 items-center'>
                 <h2 className='font-bold text-lg'><Mail /></h2>
@@ -35,13 +34,14 @@ const UserProfile = () => {
                             <Badge key={index} variant='ghost'>{skill}</Badge>
                         ))
                     ) : (
-                        <p>No skills listed</p>
+                        <p className='text-slate-500'>No skills listed</p>
                     )}
                 </div>
                 <h2 className='font-bold text-lg'>Resume</h2>
-                {(user?.profile?.skills?.length !== null) ?
-                    <a target='black' href={user?.profile?.resumeurl}><Button variant='link' className='p-0 text-blue-600 hover:text-blue-800 text-base'>{user?.fullname} Resume</Button></a>
-                    : <p>No resume uploaded</p>}
+                {user?.profile?.resumeurl ? <a target='blank' href={user.profile.resumeurl}>
+                    <Button variant='link' className='p-0 text-blue-600 hover:text-blue-800 text-base'>{user?.profile?.resumeName}</Button>
+                </a> : <p className='text-slate-500'>No resume uploaded</p>}
+
             </div>
             <hr />
             <AppliedJobs />

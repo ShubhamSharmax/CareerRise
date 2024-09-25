@@ -1,6 +1,8 @@
+import getDataUri from "../utils/datauri.js";
 import { User } from "../models/user.model.js ";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
+import cloudinary from "../utils/cloudinary.js";
 
 // Register a new user
 export const register = async (req,res) => {
@@ -9,6 +11,13 @@ export const register = async (req,res) => {
         if(!fullname || !email || !phoneNumber || !password || !role) {
             return res.status(400).json({ message: 'All fields are required' });
         };
+        const file = req.file;
+        if(!file) {
+            return res.status(400).json({ message: 'Please upload a profile picture' });
+        }
+        const dataUri = getDataUri(file);
+        const result = await cloudinary.uploader.upload(dataUri.content);
+
         //Check If User is already registered
         const user = await User.findOne({email});
         if(user){
@@ -21,7 +30,10 @@ export const register = async (req,res) => {
             email,
             phoneNumber,
             password: hashedPassword,
-            role
+            role,
+            profile: {
+                profilePicture: result.secure_url
+            }
         })
 
         return res.status(200).json({ message: 'User registered successfully'})
@@ -78,7 +90,7 @@ export const logout = async (req, res) => {
 export const updateProfile = async (req, res) =>{
     try {
         const {fullname, email, phoneNumber, bio, skills} = req.body;
-
+        const file = req.file;
         let skillsArray;
         
         if(skills){
@@ -97,6 +109,18 @@ export const updateProfile = async (req, res) =>{
         if(bio) user.profile.bio = bio;
         if(skills) user.profile.skills = skillsArray;
 
+        if(file){
+            const fileUri = getDataUri(file);
+            const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+            if(cloudResponse){
+                user.profile.resumeurl = cloudResponse.secure_url
+                user.profile.resumeName = file.originalname
+            }
+            else{
+                return res.status(400).json({ message: 'Failed to upload resume' });
+            }
+        }
+
         await user.save();
 
         user = {
@@ -109,6 +133,7 @@ export const updateProfile = async (req, res) =>{
         }
         return res.status(200).json({ message: 'Profile updated successfully', user });
     } catch (error) {
-        
+        console.log(error);
+        return res.status(500).json({ message: 'Failed to update profile', error });
     }
 }

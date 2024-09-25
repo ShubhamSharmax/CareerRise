@@ -36,6 +36,9 @@ const Signup = () => {
             formData.append('password', data.password);
             formData.append('role', data.role);
             formData.append('profile', data.profilepicture);
+            if (data.profilepicture[0]) {
+                formData.append('file', data.profilepicture[0]);
+            }
 
             const res = await axios.post(apiUrl, formData, {
                 headers: {'Content-Type': 'multipart/form-data',},

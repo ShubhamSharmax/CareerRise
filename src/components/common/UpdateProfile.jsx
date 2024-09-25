@@ -18,7 +18,7 @@ const UpdateProfile = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { register, handleSubmit, setValue, formState: { isSubmitting }, reset } = useForm({
+    const { register, handleSubmit, formState: { isSubmitting } } = useForm({
         defaultValues: {
             name: user?.fullname || '',
             email: user?.email || '',
@@ -39,6 +39,10 @@ const UpdateProfile = () => {
             formData.append('phoneNumber', data.phoneNumber);
             formData.append('bio', data.bio);
             formData.append('skills', data.skills);
+            if (data.resume[0]) {
+                formData.append('file', data.resume[0]);
+            }
+
             const res = await axios.post(apiUrl, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
                 withCredentials: true,
@@ -46,7 +50,8 @@ const UpdateProfile = () => {
 
             dispatch(setLoading(false));
             dispatch(setUser(res.data.user));
-            toast.success(res.data.message)
+            toast.success(res.data.message);
+            navigate('/profile');
         } catch (error) {
             toast.error(error.response?.data?.message || 'Error updating profile');
             dispatch(setLoading(false));
@@ -55,7 +60,7 @@ const UpdateProfile = () => {
 
     return (
         <div>
-            <Dialog>
+            <Dialog id='updateDialog'>
                 <DialogTrigger>
                     <Button variant='outline' className='rounded-full h-12 w-12 p-0'><PenBox /></Button>
                 </DialogTrigger>
@@ -91,7 +96,7 @@ const UpdateProfile = () => {
                                 <DialogFooter>
                                     <DialogClose>
                                         <Button disabled={isSubmitting} type='submit' className='w-full'>
-                                            {loading ? <Loader2 className='animate-spin h-4 w-4' /> : 'Save'}
+                                            {loading ? "<Loader2 className='animate-spin h-4 w-4' /> Saving " : 'Save'}
                                         </Button>
                                     </DialogClose>
                                 </DialogFooter>
