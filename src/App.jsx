@@ -8,6 +8,7 @@ import Footer from "./components/common/Footer";
 import JobsPage from "./components/pages/JobsPage";
 import BrowsePage from "./components/pages/BrowsePage";
 import UserProfile from "./components/pages/UserProfile";
+import JobDescription from "./components/pages/JobDescription";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/jobs" element={<JobsPage />} />
+          <Route path="/jobs/description/:id" element={<JobDescription />} />
           <Route path="/browse" element={<BrowsePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
