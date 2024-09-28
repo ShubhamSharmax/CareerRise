@@ -11,19 +11,19 @@ import { setUser } from '@/redux/authSlice';
 
 
 const Navbar = () => {
-    const {user} = useSelector(store=>store.auth)
+    const { user } = useSelector(store => store.auth)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const handleLogout = async() => {
+    const handleLogout = async () => {
         try {
             const apiUrl = `${import.meta.env.VITE_API_USER}/logout`
-            const res = await axios.get(apiUrl,{withCredentials: true});
-            if(res.status === 200){
+            const res = await axios.get(apiUrl, { withCredentials: true });
+            if (res.status === 200) {
                 dispatch(setUser(null));
                 navigate('/')
                 toast.success(res.data.message)
-            }         
+            }
         } catch (error) {
             toast.error(error.response.data.message);
         }
@@ -35,23 +35,32 @@ const Navbar = () => {
             </div>
             <div className="nav-right flex items-center gap-5">
                 <ul className='menu flex items-center gap-5 text-xl'>
-                    <NavLink to="/" className={({ isActive }) =>`font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700" : "text-slate-500"}`}>Home</NavLink>
-                    <NavLink to="/jobs" className={({ isActive }) =>`font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700" : "text-slate-500"}`}>Jobs</NavLink>
-                    <NavLink to="/browse" className={({ isActive }) =>`font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700" : "text-slate-500"}`}>Browse</NavLink>
+                    {user && user?.role === 'recruiter' ? (
+                        <>
+                            <NavLink to="/admin" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700" : "text-slate-500"}`}>Home</NavLink>
+                            <NavLink to="/admin/jobs" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700" : "text-slate-500"}`}>Jobs</NavLink>
+                        </>
+                    ) : (
+                        <>
+                            <NavLink to="/" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700" : "text-slate-500"}`}>Home</NavLink>
+                            <NavLink to="/jobs" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700" : "text-slate-500"}`}>Jobs</NavLink>
+                            <NavLink to="/browse" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700" : "text-slate-500"}`}>Browse</NavLink>
+                        </>
+                    )}
                 </ul>
                 {user && (
                     <div className="profile">
                         <Popover>
                             <PopoverTrigger>
                                 <Avatar className='cursor-pointer'>
-                                    <AvatarImage src={user?.profile?.profilePicture}/>
+                                    <AvatarImage src={user?.profile?.profilePicture} />
                                 </Avatar>
                             </PopoverTrigger>
                             <PopoverContent>
                                 <div className='flex flex-col gap-3'>
                                     <div className='flex items-center gap-5'>
                                         <Avatar>
-                                            <AvatarImage src={user?.profile?.profilePicture}/>
+                                            <AvatarImage src={user?.profile?.profilePicture} />
                                         </Avatar>
                                         <div>
                                             <h1 className='text-lg font-semibold'>{user?.fullname}</h1>
@@ -61,7 +70,11 @@ const Navbar = () => {
                                     <div className='flex flex-col text-slate-500'>
                                         <div className='flex items-center w-fit gap-1 cursor-pointer'>
                                             <User2 />
-                                            <Link to='/profile'><Button variant="link" className='text-base text-slate-700'>View Profile</Button></Link>
+                                            {user?.role === 'recruiter' ? (
+                                                <Link to='/admin/profile'><Button variant="link" className='text-base text-slate-700'>View Profile</Button></Link>
+                                            ) : (
+                                                <Link to='/profile'><Button variant="link" className='text-base text-slate-700'>View Profile</Button></Link>
+                                            )}
                                         </div>
                                         <div className='flex items-center w-fit gap-1 cursor-pointer'>
                                             <LogOut />

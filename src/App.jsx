@@ -9,6 +9,10 @@ import JobsPage from "./components/pages/JobsPage";
 import BrowsePage from "./components/pages/BrowsePage";
 import UserProfile from "./components/pages/UserProfile";
 import JobDescription from "./components/pages/JobDescription";
+import AdminHome from "./components/pages/admin/AdminHome";
+import RegisterCompany from "./components/pages/admin/RegisterCompany";
+import CompanyDescription from "./components/pages/admin/CompanyDescription";
+import UpdateCompany from "./components/common/UpdateCompany";
 
 function App() {
   return (
@@ -24,7 +28,11 @@ function App() {
           <Route path="/browse" element={<BrowsePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/profile" element={<UserProfile/>} />
+          <Route path="/profile" element={<UserProfile />} />
+          <Route path="/admin" element={<AdminHome />} />
+          <Route path="/admin/companies/register" element={<RegisterCompany />} />
+          <Route path="/admin/companies/:id" element={<CompanyDescription />} />
+          <Route path="/admin/companies/:id/update" element={<UpdateCompany />} />
         </Routes>
         <Toaster />
       </main>

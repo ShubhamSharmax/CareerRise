@@ -35,7 +35,11 @@ const Login = () => {
             })
             dispatch(setUser(res.data.user))
             toast.success(res.data.message)
-            navigate('/')
+            if (res.data.user && res.data.user?.role === 'recruiter') {
+                navigate('/admin')
+            } else {
+                navigate('/')
+            }
         } catch (error) {
             if (error.response && error.response.data.message) {
                 toast.error(error.response.data.message);
