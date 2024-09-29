@@ -1,33 +1,23 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { setCompanies } from '@/redux/companySlice'
+import useGetCompanies from '@/hooks/useGetCompanies'
 import { Avatar, AvatarImage } from '@radix-ui/react-avatar'
-import axios from 'axios'
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 const AdminHome = () => {
+  useGetCompanies()
   const navigate = useNavigate()
-  const dispatch = useDispatch()
   const { companies } = useSelector(store => store.company)
 
-  useEffect(() => {
-    const fetchCompanies = async () => {
-      try {
-        const apiUrl = `${import.meta.env.VITE_API_COMPANY}/get`
-        const res = await axios.get(apiUrl, { withCredentials: true });
-        if (res.status === 200) {
-          dispatch(setCompanies(res.data.companies))
-        }
-      } catch (error) {
-        console.log(error);
+  const [searchText, setSearchText] = useState("")
+  const [filterCompanies, setFilterCompanies] = useState(companies)
 
-      }
-    }
-    fetchCompanies()
-  }, [])
+  useEffect(() => {
+    setFilterCompanies(companies.filter(company => company.name.toLowerCase().includes(searchText.toLowerCase())))
+  }, [searchText, companies])
 
   return (
     <div className='max-w-7xl mx-auto my-10'>
@@ -40,6 +30,7 @@ const AdminHome = () => {
           type="text"
           placeholder="Search Companies"
           className='text-lg p-6'
+          onChange={(e) => setSearchText(e.target.value)}
         />
         <Button onClick={() => navigate('/admin/companies/register')} className='p-6 px-10 bg-cyan-500 hover:bg-cyan-700'>Add New</Button>
       </div>
@@ -49,7 +40,7 @@ const AdminHome = () => {
           <TableCaption>
             Companies
             <span className='text-xs text-gray-500'>
-              ({companies.length})
+              ({filterCompanies.length})
             </span>
           </TableCaption>
           <TableHeader>
@@ -57,11 +48,12 @@ const AdminHome = () => {
               <TableHead>Logo</TableHead>
               <TableHead>Company Name</TableHead>
               <TableHead>Website</TableHead>
+              <TableHead>Date Created</TableHead>
               <TableHead className='text-center'>Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {companies.map((company, index) => (
+            {filterCompanies.length > 0 && filterCompanies.map((company, index) => (
               <TableRow key={index}>
                 <TableCell>
                   <Avatar >
@@ -70,6 +62,7 @@ const AdminHome = () => {
                 </TableCell>
                 <TableCell>{company?.name}</TableCell>
                 <TableCell><a href={company?.website}><Button variant='link' className='p-0'>{company?.name}</Button></a></TableCell>
+                <TableCell>{company?.createdAt.split("T")[0]}</TableCell>
                 <TableCell className='flex items-center gap-4 justify-center'>
                   <Button variant='outline' onClick={() => navigate(`/admin/companies/${company._id}`)} >Details</Button>
                 </TableCell>

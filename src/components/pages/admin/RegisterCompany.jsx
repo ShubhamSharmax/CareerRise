@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { setCompany } from '@/redux/companySlice'
+import { setCompany, setCompanyUpdating } from '@/redux/companySlice'
 import { Label } from '@radix-ui/react-label'
 import axios from 'axios'
 import { Loader2 } from 'lucide-react'
@@ -21,6 +21,7 @@ const RegisterCompany = () => {
 
     const registerCompany = async (data) => {
         try {
+            dispatch(setCompanyUpdating(true));
             const company = {
                 companyName: data.companyName
             }
@@ -33,10 +34,12 @@ const RegisterCompany = () => {
                 toast.success("Company registered successfully")
                 dispatch(setCompany(res.data.company))
                 const companyId = res?.data?.company?._id
-                navigate(`/admin/companies/${companyId}`)
+                navigate(`/admin/companies/${companyId}/update`)
             }
         } catch (error) {
             toast.error(error.response.data.message);
+        } finally {
+            dispatch(setCompanyUpdating(false));
         }
     }
 
@@ -46,12 +49,12 @@ const RegisterCompany = () => {
                 <h1 className='text-2xl font-bold'>Create a New Company</h1>
                 <p className='text-slate-700'>you can chnage company name later.</p>
                 <div className='my-5 p-5'>
-                    <Label className='text-xl font-bold'>Company Name</Label>
+                    <Label className='block text-xl font-bold py-5'>Company Name</Label>
                     <Input type="text" placeholder="Enter Company Name" className='text-lg p-6' {...register("companyName", { required: "Company Name is required" })} />
-                    {errors.companyName && <span>{errors.companyName.message}</span>}
+                    {errors.companyName && <span className='text-red-600'>{errors.companyName.message}</span>}
                 </div>
                 <div className="flex gap-5">
-                    <Button onClick={() => navigate('/admin/companies')} variant='outline'>Cancel</Button>
+                    <Button onClick={() => navigate('/admin')} variant='outline'>Cancel</Button>
                     <Button disabled={isSubmitting} type='Submit' className='bg-cyan-500 hover:bg-cyan-700'>{isSubmitting ? <Loader2 className='animate-spin h-4 w-4' /> : 'Continue'}</Button>
                 </div>
             </form>

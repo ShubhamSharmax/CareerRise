@@ -12,8 +12,7 @@ import JobDescription from "./components/pages/JobDescription";
 import AdminHome from "./components/pages/admin/AdminHome";
 import RegisterCompany from "./components/pages/admin/RegisterCompany";
 import CompanyDescription from "./components/pages/admin/CompanyDescription";
-import UpdateCompany from "./components/common/UpdateCompany";
-
+import UpdateCompany from "./components/pages/admin/UpdateCompany";
 function App() {
   return (
     <>
