@@ -5,8 +5,10 @@ import { useSelector } from 'react-redux'
 import { Badge } from '../ui/badge'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '../ui/table'
 import UpdateProfile from '../common/UpdateProfile'
+import useGetAppliedJobs from '@/hooks/useGetAppliedJobs'
 
 const UserProfile = () => {
+    useGetAppliedJobs()
     const { user } = useSelector(store => store.auth)
     return (
         <div className='max-w-7xl mx-auto my-10 border rounded-xl p-5'>
@@ -53,28 +55,28 @@ export default UserProfile
 
 
 export const AppliedJobs = () => {
+    const { appliedJobs } = useSelector(store => store.job)
 
-    const appliedJobs = [1, 2, 3, 4]
     return (
         <div className='my-10 p-5'>
             <h1 className='text-xl font-bold'>Applied Jobs</h1>
             <Table className='my-2'>
-                <TableCaption>All Applied Jobs</TableCaption>
+                <TableCaption>{appliedJobs.length <= 0 ? "You Haven't Applied to any Job Yet" : "All Applied Jobs"}</TableCaption>
                 <TableHeader>
                     <TableRow>
                         <TableHead>Company</TableHead>
                         <TableHead>Job Role</TableHead>
                         <TableHead>Date Applied</TableHead>
-                        <TableHead className='text-right px-5'>status</TableHead>
+                        <TableHead className='text-center px-5'>status</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {appliedJobs.map((job, index) => (
+                    {appliedJobs.length > 0 && appliedJobs.map((application, index) => (
                         <TableRow key={index}>
-                            <TableCell>Company Name</TableCell>
-                            <TableCell>frontend developer</TableCell>
-                            <TableCell>23-09-2024</TableCell>
-                            <TableCell className='text-right'><Badge>status</Badge></TableCell>
+                            <TableCell>{application?.job?.company?.name}</TableCell>
+                            <TableCell>{application?.job?.title}</TableCell>
+                            <TableCell>{application?.createdAt.split("T")[0]}</TableCell>
+                            <TableCell className='text-center'><Badge variant='outline' className={`px-4 text-base text-slate-600 cursor-default ${application?.status === 'accepted' && 'bg-green-200'} ${application?.status === 'rejected' && 'bg-red-200'}`}>{application?.status}</Badge></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
