@@ -43,8 +43,8 @@ const UserProfile = () => {
                 </a> : <p className='text-slate-500'>No resume uploaded</p>}
 
             </div>
-            <hr />
-            <AppliedJobs />
+
+            {user?.role === 'candidate' && <><hr /> <AppliedJobs /></>}
         </div>
     )
 }

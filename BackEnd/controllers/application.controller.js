@@ -54,11 +54,11 @@ export const getApplications = async (req, res) => {
 export const getCandidateApplications = async (req, res) => {
     try {
         const jobId = req.params.id;
-        const job = await Job.findById(jobId).populate({path:'applications',populate:{path:'candidate'}}).sort({createdAt: -1});
-        if(!job){
-            return res.status(404).json({message: "Job not found"})
+        const application = await Application.find({job: jobId}).populate({path:'candidate'}).populate({path:'job'}).sort({createdAt: -1});
+        if(!application){
+            return res.status(404).json({message: "Applicants not found"})
         }
-        return res.status(200).json({message: "Applications fetched successfully", job})
+        return res.status(200).json({message: "Applications fetched successfully", application})
     } catch (error) {
         console.error(error);
     }

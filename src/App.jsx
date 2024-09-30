@@ -13,6 +13,9 @@ import AdminHome from "./components/pages/admin/AdminHome";
 import RegisterCompany from "./components/pages/admin/RegisterCompany";
 import CompanyDescription from "./components/pages/admin/CompanyDescription";
 import UpdateCompany from "./components/pages/admin/UpdateCompany";
+import AdminJobs from "./components/pages/admin/AdminJobs";
+import CreateJob from "./components/pages/admin/CreateJob";
+import ViewJobDetails from "./components/pages/admin/ViewJobDetails";
 function App() {
   return (
     <>
@@ -32,6 +35,9 @@ function App() {
           <Route path="/admin/companies/register" element={<RegisterCompany />} />
           <Route path="/admin/companies/:id" element={<CompanyDescription />} />
           <Route path="/admin/companies/:id/update" element={<UpdateCompany />} />
+          <Route path="/admin/jobs" element={<AdminJobs />} />
+          <Route path="/admin/jobs/create" element={<CreateJob />} />
+          <Route path="/admin/jobs/:id" element={<ViewJobDetails />} />
         </Routes>
         <Toaster />
       </main>

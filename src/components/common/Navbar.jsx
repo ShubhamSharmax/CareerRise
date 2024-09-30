@@ -70,11 +70,7 @@ const Navbar = () => {
                                     <div className='flex flex-col text-slate-500'>
                                         <div className='flex items-center w-fit gap-1 cursor-pointer'>
                                             <User2 />
-                                            {user?.role === 'recruiter' ? (
-                                                <Link to='/admin/profile'><Button variant="link" className='text-base text-slate-700'>View Profile</Button></Link>
-                                            ) : (
-                                                <Link to='/profile'><Button variant="link" className='text-base text-slate-700'>View Profile</Button></Link>
-                                            )}
+                                            <Link to='/profile'><Button variant="link" className='text-base text-slate-700'>View Profile</Button></Link>
                                         </div>
                                         <div className='flex items-center w-fit gap-1 cursor-pointer'>
                                             <LogOut />
