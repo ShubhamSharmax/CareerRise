@@ -22,7 +22,7 @@ function App() {
       <header>
         <Navbar />
       </header>
-      <main>
+      <main className="min-h-[80vh]">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/jobs" element={<JobsPage />} />
