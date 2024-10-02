@@ -71,7 +71,14 @@ export const login = async (req, res) => {
             role: user.role,
             profile:user.profile
         }
-        return res.status(200).cookie("token", token, {maxAge: 1*24*60*60*1000, httpsOnly:true, sameSite:'strict'}).json({message: `WelCome Back ${user.fullname}`,user});
+        
+        return res.status(200).cookie("token", token, {
+            maxAge: 1*24*60*60*1000, 
+            httpOnly:true,
+            secure: true, 
+            sameSite:'none'
+        }).json({message: `WelCome Back ${user.fullname}`,user});
+        
     } catch (error) {
         res.status(500).json({ message: error });
     }

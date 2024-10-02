@@ -13,16 +13,17 @@ dotenv.config();
 const PORT = process.env.PORT || 4000;
 const FRONTEND_URL = process.env.FRONTEND_URL;
 
-// middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-
+//cors Options
 const corsOptions = {
   origin: FRONTEND_URL,
   credentials: true,
 };
+
+// middleware
 app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -31,8 +32,8 @@ app.get("/", (req, res) => {
 // routes
 app.use("/api/user", userRoute);
 app.use("/api/company", companyRoute);
-app.use("/api/job", jobRoute)
-app.use("/api/application", applicationRoute)
+app.use("/api/job", jobRoute);
+app.use("/api/application", applicationRoute);
 
 app.listen(PORT, () => {
   connectDB();
