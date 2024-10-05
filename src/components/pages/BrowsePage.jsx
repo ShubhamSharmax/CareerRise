@@ -10,6 +10,11 @@ const BrowsePage = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
+        document.title = 'CareerRise - Browse Jobs'
+    }, []);
+
+
+    useEffect(() => {
         const fetchJobs = async () => {
             try {
                 const apiUrl = `${import.meta.env.VITE_API_JOB}/get?keyword=${searchQuery}`

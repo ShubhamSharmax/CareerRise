@@ -6,10 +6,16 @@ import { Badge } from '../ui/badge'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '../ui/table'
 import UpdateProfile from '../common/UpdateProfile'
 import useGetAppliedJobs from '@/hooks/useGetAppliedJobs'
+import { useEffect } from 'react'
 
 const UserProfile = () => {
     useGetAppliedJobs()
     const { user } = useSelector(store => store.auth)
+
+    useEffect(() => {
+        document.title = 'CareerRise - User Profile'
+    }, []);
+
     return (
         <div className='max-w-7xl mx-auto my-10 border rounded-xl p-5'>
             <div className="flex item-center justify-between">

@@ -17,6 +17,11 @@ const AdminJobs = () => {
     const [filterJobs, setFilterJobs] = useState(adminJobs)
 
     useEffect(() => {
+        document.title = 'CareerRise - Jobs'
+    }, []);
+
+
+    useEffect(() => {
         setFilterJobs(adminJobs.filter(job => job.title.toLowerCase().includes(searchText.toLowerCase()) || job?.company?.name.toLowerCase().includes(searchText.toLowerCase())))
     }, [searchText, adminJobs])
 

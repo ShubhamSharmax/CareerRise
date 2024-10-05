@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
@@ -20,9 +20,13 @@ const Signup = () => {
         formState: { errors, isSubmitting },
     } = useForm()
 
-    const {loading} = useSelector(store => store.auth);
+    const { loading } = useSelector(store => store.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        document.title = 'CareerRise - Sign Up'
+    }, []);
 
     const handleSignup = async (data) => {
         try {
@@ -41,7 +45,7 @@ const Signup = () => {
             }
 
             const res = await axios.post(apiUrl, formData, {
-                headers: {'Content-Type': 'multipart/form-data',},
+                headers: { 'Content-Type': 'multipart/form-data', },
                 withCredentials: true,
             })
             toast.success(res.data.message)
@@ -52,7 +56,7 @@ const Signup = () => {
             } else {
                 toast.error("An unexpected error occurred.");
             }
-        }finally {
+        } finally {
             dispatch(setLoading(false));
         }
     }
@@ -105,7 +109,7 @@ const Signup = () => {
                         <Input type="file" accept="image/png, image/jpeg" {...register("profilepicture")} />
                         {errors.profilepicture && <span>{errors.profilepicture.message}</span>}
                     </div>
-                    <Button disabled={isSubmitting} type='Submit'>{loading?<Loader2 className='animate-spin h-4 w-4'/>:'Sign Up'}</Button>
+                    <Button disabled={isSubmitting} type='Submit'>{loading ? <Loader2 className='animate-spin h-4 w-4' /> : 'Sign Up'}</Button>
                     <p className='text-center text-sm text-muted-foreground'>Already have an account? <span className='text-blue-600 underline font-medium'><Link to="/login">Login</Link></span></p>
                 </form>
             </div>

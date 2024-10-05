@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
@@ -20,6 +20,10 @@ const Login = () => {
     const { loading } = useSelector(store => store.auth)
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        document.title = 'CareerRise - Login'
+      }, []);
 
     const handleLogin = async (data) => {
         try {

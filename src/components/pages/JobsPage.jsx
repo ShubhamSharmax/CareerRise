@@ -4,6 +4,10 @@ import JobCard from '../common/JobCard'
 import { useSelector } from 'react-redux'
 
 const JobsPage = () => {
+  useEffect(() => {
+    document.title = 'CareerRise - Jobs'
+  }, []);
+
   return (
     <div className='flex max-w-[95%] mx-auto justify-evenly'>
       <div className='justify-start w-1/6'>

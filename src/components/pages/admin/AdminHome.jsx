@@ -16,6 +16,11 @@ const AdminHome = () => {
   const [filterCompanies, setFilterCompanies] = useState(companies)
 
   useEffect(() => {
+    document.title = 'CareerRise'
+  }, []);
+
+
+  useEffect(() => {
     setFilterCompanies(companies.filter(company => company.name.toLowerCase().includes(searchText.toLowerCase())))
   }, [searchText, companies])
 
