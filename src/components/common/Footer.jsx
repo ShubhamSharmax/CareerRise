@@ -9,13 +9,13 @@ const Footer = () => {
   return (
     <div className='footer bg-slate-200 shadow-inner'>
       <hr />
-      <div className='flex max-w-7xl mx-auto justify-between items-center' >
-        <div className="left flex flex-col gap-2">
+      <div className='flex max-w-7xl mx-auto justify-between items-center max-md:justify-evenly max-sm:flex-col max-sm:max-w-[95%]' >
+        <div className="left flex flex-col gap-2 max-sm:items-center">
           <div className="logo mt-5">
             <Link to='/'><h1 className='font-bold text-3xl text-slate-800'>Career<span className='text-cyan-500'>RISE</span></h1></Link>
             <p className='font-medium text-slate-600 -mt-2'>Start Your Career Journey</p>
           </div>
-          <div className='flex flex-col'>
+          <div className='flex flex-col max-sm:flex-row'>
             {user && user?.role === 'recruiter' ? (
               <>
                 <Link to="/admin"  ><Button variant='link' className='text-lg font-medium flex gap-2'><House /> Home</Button></Link>
@@ -31,8 +31,8 @@ const Footer = () => {
             )}
           </div>
         </div>
-        <div className="right flex flex-col items-center">
-          <h1 className='text-2xl font-bold my-2'>Social Links</h1>
+        <div className="right flex flex-col items-center max-sm:my-4">
+          <h1 className='text-2xl font-bold my-2 max-sm:text-xl'>Social Links</h1>
           <div className='flex items-center gap-5'>
             <Github className='stroke-cyan-500 hover:scale-110 cursor-pointer' size='42' />
             <FacebookIcon className='stroke-cyan-500 hover:scale-110 cursor-pointer' size='42' />
@@ -43,7 +43,7 @@ const Footer = () => {
         </div>
       </div>
       <hr className='border-slate-300' />
-      <p className='text-center p-2 text-base font-medium text-slate-500'>2024 CareerRise. All rights reserved.</p>
+      <p className='text-center p-2 text-base font-medium text-slate-500'>&copy; 2024 CareerRise. All rights reserved.</p>
     </div>
   )
 }

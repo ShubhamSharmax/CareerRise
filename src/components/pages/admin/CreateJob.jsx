@@ -53,10 +53,10 @@ const CreateJob = () => {
     }
 
     return (
-        <div className='max-w-7xl my-10 mx-auto'>
+        <div className='max-w-7xl my-10 mx-auto max-md:pl-2'>
             <div className='flex justify-between items-center'>
                 <Button variant='outline' onClick={() => navigate(`/admin/jobs`)}><ArrowLeft /> Back</Button>
-                <h1 className='text-3xl font-bold w-full text-center'>Create New Job</h1>
+                <h1 className='text-3xl font-bold w-full text-center max-sm:text-2xl'>Create New Job</h1>
             </div>
             <div className='max-w-5xl mx-auto my-5'>
                 <form onSubmit={handleSubmit(registerJob)}>

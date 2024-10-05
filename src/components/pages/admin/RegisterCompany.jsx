@@ -44,7 +44,7 @@ const RegisterCompany = () => {
     }
 
     return (
-        <div className='max-w-7xl my-10 mx-auto'>
+        <div className='max-w-7xl my-10 mx-auto max-md:pl-4'>
             <form onSubmit={handleSubmit(registerCompany)}>
                 <h1 className='text-2xl font-bold'>Create a New Company</h1>
                 <p className='text-slate-700'>you can chnage company name later.</p>
@@ -53,7 +53,7 @@ const RegisterCompany = () => {
                     <Input type="text" placeholder="Enter Company Name" className='text-lg p-6' {...register("companyName", { required: "Company Name is required" })} />
                     {errors.companyName && <span className='text-red-600'>{errors.companyName.message}</span>}
                 </div>
-                <div className="flex gap-5">
+                <div className="flex gap-5 items-center max-sm:justify-center">
                     <Button onClick={() => navigate('/admin')} variant='outline'>Cancel</Button>
                     <Button disabled={isSubmitting} type='Submit' className='bg-cyan-500 hover:bg-cyan-700'>{isSubmitting ? <Loader2 className='animate-spin h-4 w-4' /> : 'Continue'}</Button>
                 </div>

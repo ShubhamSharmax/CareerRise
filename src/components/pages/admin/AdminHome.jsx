@@ -25,23 +25,23 @@ const AdminHome = () => {
   }, [searchText, companies])
 
   return (
-    <div className='max-w-7xl mx-auto my-10'>
-      <div className='my-2'>
+    <div className='max-w-7xl mx-auto my-10 max-md:pl-2'>
+      <div className='my-2 '>
         <h1 className='text-xl font-bold'>Admin Dashboard</h1>
         <p>Welcome to the admin dashboard.</p>
       </div>
-      <div className='flex items-center gap-4 my-10'>
+      <div className='flex items-center gap-4 my-10 max-sm:flex-col max-sm:w-[95%] max-sm:mx-auto'>
         <Input
           type="text"
           placeholder="Search Companies"
           className='text-lg p-6'
           onChange={(e) => setSearchText(e.target.value)}
         />
-        <Button onClick={() => navigate('/admin/companies/register')} className='p-6 px-10 bg-cyan-500 hover:bg-cyan-700'>Add New</Button>
+        <Button onClick={() => navigate('/admin/companies/register')} className='p-6 px-10 bg-cyan-500 hover:bg-cyan-700 max-sm:self-end'>Add New</Button>
       </div>
       <div>
         <h1 className='my-5 text-xl font-bold'>Companies Created By You </h1>
-        <Table>
+        <Table className='my-2 max-sm:overflow-x-auto max-sm:w-[640px]'>
           <TableCaption>
             Companies
             <span className='text-xs text-gray-500'>

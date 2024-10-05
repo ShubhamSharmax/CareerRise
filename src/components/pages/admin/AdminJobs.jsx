@@ -26,21 +26,21 @@ const AdminJobs = () => {
     }, [searchText, adminJobs])
 
     return (
-        <div className='max-w-7xl mx-auto my-10'>
+        <div className='max-w-7xl mx-auto my-10 max-md:pl-2'>
             <h1 className='text-2xl font-bold'>Jobs</h1>
             <p>Manage all your job listings</p>
-            <div className='flex items-center gap-4 my-10'>
+            <div className='flex items-center gap-4 my-10 max-sm:flex-col max-sm:w-[95%]'>
                 <Input
                     type="text"
                     placeholder="Search Jobs"
                     className='text-lg p-6'
                     onChange={(e) => setSearchText(e.target.value)}
                 />
-                <Button onClick={() => navigate('/admin/jobs/create')} className='p-6 px-10 bg-cyan-500 hover:bg-cyan-700'>Post New Job</Button>
+                <Button onClick={() => navigate('/admin/jobs/create')} className='p-6 px-10 bg-cyan-500 hover:bg-cyan-700 max-sm:self-end'>Post New Job</Button>
             </div>
             <div>
                 <h1 className='my-5 text-xl font-bold'>Jobs Posted By You</h1>
-                <Table>
+                <Table className='my-2 max-sm:overflow-x-auto max-sm:w-[640px]'>
                     <TableCaption>
                         Recent Created Jobs
                         <span className='text-xs text-gray-500'>

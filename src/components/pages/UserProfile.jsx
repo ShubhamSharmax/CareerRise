@@ -17,7 +17,7 @@ const UserProfile = () => {
     }, []);
 
     return (
-        <div className='max-w-7xl mx-auto my-10 border rounded-xl p-5'>
+        <div className='max-w-7xl mx-auto my-10 border rounded-xl p-5 max-sm:p-2 max-sm:my-5 max-sm:mx-1'>
             <div className="flex item-center justify-between">
                 <div className='flex gap-5 items-center m-5 '>
                     <Avatar className='h-24 w-24'>
@@ -36,7 +36,7 @@ const UserProfile = () => {
                 <h2 className='font-bold text-lg'><Phone /></h2>
                 <h3 className='font-medium'>{user?.phoneNumber}</h3>
                 <h2 className='font-bold text-lg'>Skills</h2>
-                <div className="skillbadges flex flex-wrap gap-5">
+                <div className="skillbadges flex flex-wrap gap-5 max-sm:gap-2">
                     {user?.profile?.skills?.length > 0 ? (
                         user.profile.skills.map((skill, index) => (
                             <Badge key={index} variant='ghost'>{skill}</Badge>
@@ -66,8 +66,8 @@ export const AppliedJobs = () => {
     return (
         <div className='my-10 p-5'>
             <h1 className='text-xl font-bold'>Applied Jobs</h1>
-            <Table className='my-2'>
-                <TableCaption>{appliedJobs.length <= 0 ? "You Haven't Applied to any Job Yet" : "All Applied Jobs"}</TableCaption>
+            <Table className='my-2 max-sm:overflow-x-auto max-sm:w-[640px]'>
+                <TableCaption className='max-sm:text-left'>{appliedJobs.length <= 0 ? "You Haven't Applied to any Job Yet" : "All Applied Jobs"}</TableCaption>
                 <TableHeader>
                     <TableRow>
                         <TableHead>Company</TableHead>

@@ -45,7 +45,7 @@ const ViewJobDetails = () => {
     }, [jobId]);
 
     return (
-        <div className='max-w-7xl mx-auto my-10 border rounded-xl p-5'>
+        <div className='max-w-7xl mx-auto my-10 border rounded-xl p-5 max-sm:my-5'>
             <div className='flex items-center my-5'>
                 <Button variant='outline' onClick={() => navigate('/admin/jobs')}><ArrowLeft /> Back</Button>
                 <div className='flex-1'>
@@ -58,21 +58,21 @@ const ViewJobDetails = () => {
                         <AvatarImage src={job?.company?.logo} />
                     </Avatar>
                     <div>
-                        <h1 className='font-bold text-2xl'>{job?.title}</h1>
-                        <p className='font-medium'>{job?.company?.name}</p>
+                        <h1 className='font-bold text-2xl max-sm:text-xl'>{job?.title}</h1>
+                        <p className='font-medium max-sm:font-normal'>{job?.company?.name}</p>
                     </div>
                 </div>
             </div>
             <hr />
-            <div className='grid grid-cols-2 gap-y-4 p-5 text-lg'>
+            <div className='grid grid-cols-2 gap-y-4 p-5 text-lg max-sm:text-base'>
                 <h2 className='font-medium text-lg'>Location:</h2>
                 <p>{job?.location}</p>
 
                 <h2 className='font-medium text-lg'>Description:</h2>
-                <p> {job?.description}</p>
+                <p className='text-justify'> {job?.description}</p>
 
                 <h2 className='font-medium text-lg'>Requirements:</h2>
-                <div className='flex gap-4'>
+                <div className='flex gap-4 flex-wrap'>
                     {job?.requirements.map((item, index) => (
                         <Badge key={index} variant='ghost' className='px-5'>{item}</Badge>
                     ))}

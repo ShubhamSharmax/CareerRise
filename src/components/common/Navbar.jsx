@@ -1,7 +1,7 @@
 import React from 'react';
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
 import { Avatar, AvatarImage } from '../ui/avatar';
-import { LogOut, User2 } from 'lucide-react';
+import { LogOut, Menu, User2 } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,12 +29,12 @@ const Navbar = () => {
         }
     }
     return (
-        <nav className='navbar flex items-center justify-between mx-auto max-w-7xl h-16'>
-            <div className="nav-left">
-                <Link to='/'><h1 className='font-bold text-3xl text-slate-800'>Career<span className='text-cyan-500'>RISE</span></h1></Link>
+        <nav className='navbar flex items-center justify-between mx-auto max-w-7xl h-16 max-md:pl-2'>
+            <div className="nav-left flex items-center gap-2">
+                    <Link to='/'><h1 className='font-bold text-3xl text-slate-800 max-sm:text-2xl'>Career<span className='text-cyan-500'>RISE</span></h1></Link>
             </div>
             <div className="nav-right flex items-center gap-5">
-                <ul className='menu flex items-center gap-5 text-xl'>
+                <ul className='menu flex items-center gap-5 text-xl max-sm:hidden'>
                     {user && user?.role === 'recruiter' ? (
                         <>
                             <NavLink to="/admin" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700" : "text-slate-500"}`}>Home</NavLink>
@@ -88,6 +88,29 @@ const Navbar = () => {
                         <Link to='/signup'><Button className='bg-cyan-500 hover:bg-cyan-700'>Sign Up</Button></Link>
                     </div>
                 )}
+                 <div className='sm:hidden'>
+                    <Popover>
+                        <PopoverTrigger>
+                            <Menu size={36} />
+                        </PopoverTrigger>
+                        <PopoverContent className='w-40'>
+                            <ul className='menu flex flex-col items-center gap-5 text-xl sm:hidden'>
+                                {user && user?.role === 'recruiter' ? (
+                                    <>
+                                        <NavLink to="/admin" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700" : "text-slate-500"}`}>Home</NavLink>
+                                        <NavLink to="/admin/jobs" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700" : "text-slate-500"}`}>Jobs</NavLink>
+                                    </>
+                                ) : (
+                                    <>
+                                        <NavLink to="/" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700" : "text-slate-500"}`}>Home</NavLink>
+                                        <NavLink to="/jobs" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700" : "text-slate-500"}`}>Jobs</NavLink>
+                                        <NavLink to="/browse" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700" : "text-slate-500"}`}>Browse</NavLink>
+                                    </>
+                                )}
+                            </ul>
+                        </PopoverContent>
+                    </Popover>
+                </div>
             </div>
         </nav>
     )

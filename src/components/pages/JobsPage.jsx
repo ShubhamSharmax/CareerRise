@@ -9,7 +9,7 @@ const JobsPage = () => {
   }, []);
 
   return (
-    <div className='flex max-w-[95%] mx-auto justify-evenly'>
+    <div className='flex max-w-[95%] mx-auto my-10 justify-evenly max-sm:flex-col'>
       <div className='justify-start w-1/6'>
         <JobFilterMenu />
       </div>
@@ -42,9 +42,9 @@ const Jobs = () => {
   }, [jobs, searchQuery]);
 
   return (
-    <div className='my-10'>
+    <div className='my-10 max-sm:my-2'>
       {filteredJobs.length === 0 && <h2 className='p-5 text-lg '>No Jobs Found for "<span className='font-medium'>{searchQuery}</span>"</h2>}
-      <div className='grid grid-cols-3 gap-8 p-5'>
+      <div className='grid grid-cols-3 gap-8 p-5 max-md:grid-cols-2 max-sm:grid-cols-1'>
         {filteredJobs.map((job, index) => (
           <div key={index}>
             <JobCard job={job} />

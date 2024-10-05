@@ -31,9 +31,9 @@ const BrowsePage = () => {
     }, [])
 
     return (
-        <div className='max-w-[95rem] mx-auto my-10'>
+        <div className='max-w-[95rem] mx-auto my-10 max-sm:my-5'>
             <h1 className='text-xl font-bold'>Showing Search Results({filterJobs?.length})</h1>
-            <div className='grid grid-cols-3 gap-8 p-5'>
+            <div className='grid grid-cols-3 gap-8 p-5 max-md:grid-cols-2 max-sm:grid-cols-1'>
                 {filterJobs.length > 0 && filterJobs.map((job, index) => (
                     <div key={index} >
                         <JobCard job={job} />

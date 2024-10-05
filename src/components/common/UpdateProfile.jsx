@@ -64,32 +64,32 @@ const UpdateProfile = () => {
                 <DialogTrigger>
                     <Button variant='outline' className='rounded-full h-12 w-12 p-0'><PenBox /></Button>
                 </DialogTrigger>
-                <DialogContent>
+                <DialogContent className='max-sm:max-w-[95%] max-sm:mx-auto'>
                     <DialogHeader>
                         <DialogTitle>Update Profile</DialogTitle>
-                        <DialogDescription>
+                        <DialogDescription className='text-black'>
                             <form onSubmit={handleSubmit(onSubmit)}>
-                                <div className='flex gap-4 items-center my-4'>
+                                <div className='flex gap-4 items-center my-4 max-sm:flex-col max-sm:items-start'>
                                     <Label className='text-base'>Name:</Label>
                                     <Input type='text' id='name' {...register('name')} />
                                 </div>
-                                <div className='flex gap-4 items-center my-4'>
+                                <div className='flex gap-4 items-center my-4 max-sm:flex-col max-sm:items-start'>
                                     <Label className='text-base'>Email:</Label>
                                     <Input type='email' id='email' {...register('email')} />
                                 </div>
-                                <div className='flex gap-4 items-center my-4'>
+                                <div className='flex gap-4 items-center my-4 max-sm:flex-col max-sm:items-start'>
                                     <Label className='text-base'>Number:</Label>
                                     <Input type='text' id='phoneNumber' {...register('phoneNumber')} />
                                 </div>
-                                <div className='flex gap-4 items-center my-4'>
+                                <div className='flex gap-4 items-center my-4 max-sm:flex-col max-sm:items-start'>
                                     <Label className='text-base'>Bio:</Label>
                                     <Input type='text' id='bio' placeholder='Enter your Bio' {...register('bio')} />
                                 </div>
-                                <div className='flex gap-4 items-center my-4'>
+                                <div className='flex gap-4 items-center my-4 max-sm:flex-col max-sm:items-start'>
                                     <Label className='text-base'>Skills:</Label>
                                     <Input type='text' id='skills' placeholder='separate with comma( , ) example html,css,js' {...register('skills')} />
                                 </div>
-                                <div className='flex gap-4 items-center my-4'>
+                                <div className='flex gap-4 items-center my-4 max-sm:flex-col max-sm:items-start'>
                                     <Label className='text-base'>Resume:</Label>
                                     <Input type='file' id='resume' {...register('resume')} />
                                 </div>
