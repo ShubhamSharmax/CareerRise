@@ -7,7 +7,7 @@ import { Bookmark } from 'lucide-react'
 import { Button } from '../ui/button'
 import { useNavigate } from 'react-router-dom'
 
-const JobCard = ({job}) => {
+const JobCard = ({ job }) => {
     const navigate = useNavigate();
 
     const daysAgo = (date) => {
@@ -23,7 +23,7 @@ const JobCard = ({job}) => {
             <Card>
                 <CardHeader>
                     <div className="top flex justify-between item-center">
-                        <span className='font-medium text-slate-400 max-sm:text-sm'>{daysAgo(job?.createdAt)=== 0 ? "Today" : `${daysAgo(job?.createdAt)} days ago`}</span>
+                        <span className='font-medium text-slate-400 max-sm:text-sm'>{daysAgo(job?.createdAt) === 0 ? "Today" : `${daysAgo(job?.createdAt)} days ago`}</span>
                         <Button variant='outline' className='rounded-full h-10 w-10 p-0'><Bookmark /></Button>
                     </div>
                     <div className='flex items-center gap-5'>
@@ -34,19 +34,18 @@ const JobCard = ({job}) => {
                             <CardTitle className='text-3xl max-sm:text-2xl'>{job?.title}</CardTitle>
                             <CardDescription>{job?.location}</CardDescription>
                         </div>
-
                     </div>
                 </CardHeader>
                 <CardContent>
-                    <p>{job?.description}</p>
+                    <p className='line-clamp-2'>{job?.description}</p>
                 </CardContent>
                 <CardFooter className='flex justify-between max-sm:flex-col max-sm:gap-4'>
-                    <div className='flex gap-5 max-sm:gap-2 max-sm:self-start'>
+                    <div className='flex gap-3 max-sm:gap-2 max-sm:self-start'>
                         <Badge variant='ghost' className='text-red-600 font-medium text-sm'>{job?.salary} LPA</Badge>
                         <Badge variant='ghost' className='text-blue-600 font-medium text-sm'>{job?.position} Positions</Badge>
                         <Badge variant='ghost' className='text-cyan-500 font-medium text-sm'>{job?.jobType}</Badge>
                     </div>
-                    <Button onClick={()=> navigate(`/jobs/description/${job?._id}`)} className='bg-cyan-500 hover:bg-cyan-700 max-sm:self-end'>View Details</Button>
+                    <Button onClick={() => navigate(`/jobs/description/${job?._id}`)} className='bg-cyan-500 hover:bg-cyan-700 max-sm:self-end'>View Details</Button>
                 </CardFooter>
             </Card>
         </div>
