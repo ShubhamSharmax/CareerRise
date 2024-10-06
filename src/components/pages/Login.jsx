@@ -9,6 +9,7 @@ import { toast } from 'sonner'
 import { useDispatch, useSelector } from 'react-redux'
 import { setLoading, setUser } from '@/redux/authSlice'
 import { Loader2 } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 const Login = () => {
     const {
@@ -23,7 +24,7 @@ const Login = () => {
 
     useEffect(() => {
         document.title = 'CareerRise - Login'
-      }, []);
+    }, []);
 
     const handleLogin = async (data) => {
         try {
@@ -56,7 +57,12 @@ const Login = () => {
     }
     return (
         <>
-            <div className='max-w-7xl m-auto flex items-center justify-center my-10'>
+            <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className='max-w-7xl m-auto flex items-center justify-center my-10'
+            >
                 <form onSubmit={handleSubmit(handleLogin)} className='w-1/2 flex flex-col gap-6 border p-5 shadow-md rounded-md border-slate-300 max-md:w-2/3 max-sm:w-11/12'>
                     <h1 className='font-bold text-2xl text-center mb-5'>Login</h1>
                     <div className="email">
@@ -72,7 +78,7 @@ const Login = () => {
                     <Button disabled={isSubmitting} type='Submit'>{loading ? <Loader2 className='animate-spin h-4 w-4' /> : 'Log In'}</Button>
                     <p className='text-center text-sm text-muted-foreground'>Don't have an account? <span className='text-blue-600 underline font-medium'><Link to="/signup">Register</Link></span></p>
                 </form>
-            </div>
+            </motion.div>
         </>
     )
 }

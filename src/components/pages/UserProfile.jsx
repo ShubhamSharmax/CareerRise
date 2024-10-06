@@ -7,6 +7,7 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import UpdateProfile from '../common/UpdateProfile'
 import useGetAppliedJobs from '@/hooks/useGetAppliedJobs'
 import { useEffect } from 'react'
+import { motion } from 'framer-motion'
 
 const UserProfile = () => {
     useGetAppliedJobs()
@@ -20,17 +21,32 @@ const UserProfile = () => {
         <div className='max-w-7xl mx-auto my-10 border rounded-xl p-5 max-sm:p-2 max-sm:my-5 max-sm:mx-1'>
             <div className="flex item-center justify-between">
                 <div className='flex gap-5 items-center m-5 '>
-                    <Avatar className='h-24 w-24'>
-                        <AvatarImage src={user?.profile?.profilePicture} />
-                    </Avatar>
-                    <div>
+                    <motion.div
+                        initial={{ opacity: 0, x: -50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        <Avatar className='h-24 w-24'>
+                            <AvatarImage src={user?.profile?.profilePicture} />
+                        </Avatar>
+                    </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
+                    >
                         <h1 className='font-bold text-2xl'>{user?.fullname}</h1>
                         <p className='font-medium'>{user?.profile?.bio}</p>
-                    </div>
+                    </motion.div>
                 </div>
                 <UpdateProfile />
             </div>
-            <div className='grid grid-cols-[20%_1fr] gap-5 p-8 items-center'>
+            <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                className='grid grid-cols-[20%_1fr] gap-5 p-8 items-center'
+            >
                 <h2 className='font-bold text-lg'><Mail /></h2>
                 <h3 className='font-medium'>{user?.email}</h3>
                 <h2 className='font-bold text-lg'><Phone /></h2>
@@ -49,8 +65,7 @@ const UserProfile = () => {
                 {user?.profile?.resumeurl ? <a target='blank' href={user.profile.resumeurl}>
                     <Button variant='link' className='p-0 text-blue-600 hover:text-blue-800 text-base'>{user?.profile?.resumeName}</Button>
                 </a> : <p className='text-slate-500'>No resume uploaded</p>}
-
-            </div>
+            </motion.div>
 
             {user?.role === 'candidate' && <><hr /> <AppliedJobs /></>}
         </div>
@@ -64,7 +79,12 @@ export const AppliedJobs = () => {
     const { appliedJobs } = useSelector(store => store.job)
 
     return (
-        <div className='my-10 p-5'>
+        <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+            className='my-10 p-5'
+        >
             <h1 className='text-xl font-bold'>Applied Jobs</h1>
             <Table className='my-2 max-sm:overflow-x-auto max-sm:w-[640px]'>
                 <TableCaption className='max-sm:text-left'>{appliedJobs.length <= 0 ? "You Haven't Applied to any Job Yet" : "All Applied Jobs"}</TableCaption>
@@ -87,6 +107,6 @@ export const AppliedJobs = () => {
                     ))}
                 </TableBody>
             </Table>
-        </div>
+        </motion.div>
     )
 }

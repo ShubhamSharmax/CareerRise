@@ -3,6 +3,7 @@ import JobCard from '../common/JobCard'
 import { useDispatch, useSelector } from 'react-redux'
 import { setFilterJobs, setSearchQuery } from '@/redux/jobSlice'
 import axios from 'axios'
+import { motion } from 'framer-motion'
 
 const BrowsePage = () => {
     const { filterJobs } = useSelector(store => store.job)
@@ -35,9 +36,14 @@ const BrowsePage = () => {
             <h1 className='text-xl font-bold'>Showing Search Results({filterJobs?.length})</h1>
             <div className='grid grid-cols-3 gap-8 p-5 max-md:grid-cols-2 max-sm:grid-cols-1'>
                 {filterJobs.length > 0 && filterJobs.map((job, index) => (
-                    <div key={index} >
+                    <motion.div
+                        initial={{ y: 30, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 0.5, delay: (index * 0.1) }}
+                        key={index}
+                    >
                         <JobCard job={job} />
-                    </div>
+                    </motion.div>
                 ))}
             </div>
         </div>
