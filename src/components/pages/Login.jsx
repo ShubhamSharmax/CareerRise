@@ -75,7 +75,7 @@ const Login = () => {
                         <Input type="password" placeholder='Enter Your Password' {...register("password", { required: "Password is required" })} />
                         {errors.password && <span>{errors.password.message}</span>}
                     </div>
-                    <Button disabled={isSubmitting} type='Submit'>{loading ? <Loader2 className='animate-spin h-4 w-4' /> : 'Log In'}</Button>
+                    <Button disabled={isSubmitting} type='Submit' className='bg-cyan-500 hover:bg-cyan-700 text-white'>{loading ? <Loader2 className='animate-spin h-4 w-4' /> : 'Log In'}</Button>
                     <p className='text-center text-sm text-muted-foreground'>Don't have an account? <span className='text-blue-600 underline font-medium'><Link to="/signup">Register</Link></span></p>
                 </form>
             </motion.div>

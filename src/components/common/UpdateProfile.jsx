@@ -67,7 +67,7 @@ const UpdateProfile = () => {
                 <DialogContent className='max-sm:max-w-[95%] max-sm:mx-auto'>
                     <DialogHeader>
                         <DialogTitle>Update Profile</DialogTitle>
-                        <DialogDescription className='text-black'>
+                        <DialogDescription className='text-black dark:text-white'>
                             <form onSubmit={handleSubmit(onSubmit)}>
                                 <div className='flex gap-4 items-center my-4 max-sm:flex-col max-sm:items-start'>
                                     <Label className='text-base'>Name:</Label>

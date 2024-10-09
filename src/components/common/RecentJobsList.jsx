@@ -48,9 +48,8 @@ const RecentJobsList = () => {
                             whileHover={{ scale: 1.1 }}
                         >
                             <Button
-
                                 variant='outline'
-                                className='font-medium text-xl p-6 px-4 bg-slate-100 rounded-full shadow-sm'
+                                className='font-medium text-xl p-6 px-4 bg-slate-100 rounded-full shadow-sm dark:bg-slate-950 dark:hover:bg-slate-900'
                             >
                                 Explore More Jobs...
                             </Button>

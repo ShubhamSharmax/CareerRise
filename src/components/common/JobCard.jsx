@@ -45,7 +45,7 @@ const JobCard = ({ job }) => {
                         <Badge variant='ghost' className='text-blue-600 font-medium text-sm'>{job?.position} Positions</Badge>
                         <Badge variant='ghost' className='text-cyan-500 font-medium text-sm'>{job?.jobType}</Badge>
                     </div>
-                    <Button onClick={() => navigate(`/jobs/description/${job?._id}`)} className='bg-cyan-500 hover:bg-cyan-700 max-sm:self-end'>View Details</Button>
+                    <Button onClick={() => navigate(`/jobs/description/${job?._id}`)} className='bg-cyan-500 hover:bg-cyan-700 text-white max-sm:self-end'>View Details</Button>
                 </CardFooter>
             </Card>
         </div>

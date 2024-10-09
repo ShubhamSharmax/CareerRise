@@ -115,7 +115,7 @@ const Signup = () => {
                         <Input type="file" accept="image/png, image/jpeg" {...register("profilepicture")} />
                         {errors.profilepicture && <span>{errors.profilepicture.message}</span>}
                     </div>
-                    <Button disabled={isSubmitting} type='Submit'>{loading ? <Loader2 className='animate-spin h-4 w-4' /> : 'Sign Up'}</Button>
+                    <Button disabled={isSubmitting} type='Submit' className='bg-cyan-500 hover:bg-cyan-700 text-white'>{loading ? <Loader2 className='animate-spin h-4 w-4' /> : 'Sign Up'}</Button>
                     <p className='text-center text-sm text-muted-foreground'>Already have an account? <span className='text-blue-600 underline font-medium'><Link to="/login">Login</Link></span></p>
                 </form>
             </motion.div>

@@ -7,12 +7,12 @@ import { Button } from '../ui/button';
 const Footer = () => {
   const { user } = useSelector((store) => store.auth);
   return (
-    <div className='footer bg-slate-200 shadow-inner'>
+    <div className='footer bg-slate-200 shadow-inner dark:bg-slate-900'>
       <hr />
       <div className='flex max-w-7xl mx-auto justify-between items-center max-md:justify-evenly max-sm:flex-col max-sm:max-w-[95%]' >
         <div className="left flex flex-col gap-2 max-sm:items-center">
           <div className="logo mt-5">
-            <Link to='/'><h1 className='font-bold text-3xl text-slate-800'>Career<span className='text-cyan-500'>RISE</span></h1></Link>
+            <Link to='/'><h1 className='font-bold text-3xl'>Career<span className='text-cyan-500'>RISE</span></h1></Link>
             <p className='font-medium text-slate-600 -mt-2'>Start Your Career Journey</p>
           </div>
           <div className='flex flex-col max-sm:flex-row'>
@@ -42,7 +42,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <hr className='border-slate-300' />
+      <hr className='border-slate-300 dark:border-slate-700' />
       <p className='text-center p-2 text-base font-medium text-slate-500'>&copy; 2024 CareerRise. All rights reserved.</p>
     </div>
   )

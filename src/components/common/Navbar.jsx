@@ -9,6 +9,7 @@ import axios from 'axios';
 import { toast } from 'sonner';
 import { setUser } from '@/redux/authSlice';
 import { motion } from 'framer-motion';
+import ToggleTheme from './ToggleTheme';
 
 
 const Navbar = () => {
@@ -42,7 +43,7 @@ const Navbar = () => {
                         initial={{ opacity: 0, scale: .5 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.5, delay: 0.3 }}
-                        className='font-bold text-3xl text-slate-800 max-sm:text-2xl'
+                        className='font-bold text-3xl max-sm:text-2xl'
                     >
                         Career<span className='text-cyan-500'>RISE</span>
                     </motion.h1>
@@ -57,14 +58,16 @@ const Navbar = () => {
                 >
                     {user && user?.role === 'recruiter' ? (
                         <>
-                            <NavLink to="/admin" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700" : "text-slate-500"}`}>Home</NavLink>
-                            <NavLink to="/admin/jobs" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700" : "text-slate-500"}`}>Jobs</NavLink>
+                            <NavLink to="/admin" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700 dark:text-slate-100" : "text-slate-500"}`}>Home</NavLink>
+                            <NavLink to="/admin/jobs" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700 dark:text-slate-100" : "text-slate-500"}`}>Jobs</NavLink>
+                            <ToggleTheme />
                         </>
                     ) : (
                         <>
-                            <NavLink to="/" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700" : "text-slate-500"}`}>Home</NavLink>
-                            <NavLink to="/jobs" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700" : "text-slate-500"}`}>Jobs</NavLink>
-                            <NavLink to="/browse" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700" : "text-slate-500"}`}>Browse</NavLink>
+                            <NavLink to="/" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700  dark:text-slate-100" : "text-slate-500"}`}>Home</NavLink>
+                            <NavLink to="/jobs" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700 dark:text-slate-100" : "text-slate-500"}`}>Jobs</NavLink>
+                            <NavLink to="/browse" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700 dark:text-slate-100" : "text-slate-500"}`}>Browse</NavLink>
+                            <ToggleTheme />
                         </>
                     )}
                 </motion.ul>
@@ -73,7 +76,8 @@ const Navbar = () => {
                         initial={{ opacity: 0, x: 100 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5, delay: 0.4 }}
-                        className="profile">
+                        className="profile"
+                    >
                         <Popover>
                             <PopoverTrigger>
                                 <Avatar className='cursor-pointer'>
@@ -111,9 +115,10 @@ const Navbar = () => {
                         initial={{ opacity: 0, x: 100 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5, delay: 0.4 }}
-                        className="buttons flex items gap-2">
+                        className="buttons flex items gap-2"
+                    >
                         <Link to='/login'><Button variant="outline">Log In</Button></Link>
-                        <Link to='/signup'><Button className='bg-cyan-500 hover:bg-cyan-700'>Sign Up</Button></Link>
+                        <Link to='/signup'><Button className='bg-cyan-500 hover:bg-cyan-700 text-white'>Sign Up</Button></Link>
                     </motion.div>
                 )}
                 <div className='sm:hidden'>
@@ -125,14 +130,16 @@ const Navbar = () => {
                             <ul className='menu flex flex-col items-center gap-5 text-xl sm:hidden'>
                                 {user && user?.role === 'recruiter' ? (
                                     <>
-                                        <NavLink to="/admin" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700" : "text-slate-500"}`}>Home</NavLink>
-                                        <NavLink to="/admin/jobs" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700" : "text-slate-500"}`}>Jobs</NavLink>
+                                        <NavLink to="/admin" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700 dark:text-slate-100" : "text-slate-500"}`}>Home</NavLink>
+                                        <NavLink to="/admin/jobs" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700 dark:text-slate-100" : "text-slate-500"}`}>Jobs</NavLink>
+                                        <ToggleTheme />
                                     </>
                                 ) : (
                                     <>
-                                        <NavLink to="/" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700" : "text-slate-500"}`}>Home</NavLink>
-                                        <NavLink to="/jobs" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700" : "text-slate-500"}`}>Jobs</NavLink>
-                                        <NavLink to="/browse" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700" : "text-slate-500"}`}>Browse</NavLink>
+                                        <NavLink to="/" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700 dark:text-slate-100" : "text-slate-500"}`}>Home</NavLink>
+                                        <NavLink to="/jobs" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700 dark:text-slate-100" : "text-slate-500"}`}>Jobs</NavLink>
+                                        <NavLink to="/browse" className={({ isActive }) => `font-semibold hover:text-slate-800  transition-all duration-200 ease-in-out  ${isActive ? "scale-110 text-slate-700 dark:text-slate-100" : "text-slate-500"}`}>Browse</NavLink>
+                                        <ToggleTheme />
                                     </>
                                 )}
                             </ul>
